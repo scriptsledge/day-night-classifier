@@ -4,7 +4,7 @@
 
 This directory contains the 20 source images used for training the Day/Night classifier.
 
-**Source:** These are standard test images used for computer vision tasks.
+**Source:** Images were captured using a personal Android device camera for a lab assignment.
 **Format:** `.jpg`
 
 ## Image Gallery
