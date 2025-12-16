@@ -1,0 +1,8 @@
+.git
+.venv
+env
+__pycache__
+gui_app/assets
+feature_table.csv
+*.joblib
+.DS_Store

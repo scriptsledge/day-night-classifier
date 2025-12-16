@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: day-night-classifier-deployment
+  labels:
+    app: day-night-classifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: day-night-classifier
+  template:
+    metadata:
+      labels:
+        app: day-night-classifier
+    spec:
+      # This is critical for local development with manual labeling.
+      # In a real K8s cluster, you would use PersistentVolumeClaims
+      # with network storage (e.g., NFS, S3) for data persistence.
+      # For Minikube, HostPath is often used to share host directories.
+      volumes:
+        - name: app-data
+          hostPath:
+            # The directory within the Minikube VM where project files are copied
+            path: /tmp/day-night-classifier
+            type: Directory
+      containers:
+        - name: day-night-classifier
+          image: day-night-classifier:latest
+          imagePullPolicy: Never # Use local image, for Minikube demo
+          ports:
+            - containerPort: 8501
+          volumeMounts:
+            - name: app-data
+              mountPath: /app
+          command: ["/bin/bash", "-c"]
+          # This command ensures the container stays alive.
+          # You would then kubectl exec into it to run scripts.
+          args: ["tail -f /dev/null"]
+          # Alternatively, for full automation (after manual labeling is done and persisted)
+          # args: ["streamlit", "run", "gui_app/app.py"]

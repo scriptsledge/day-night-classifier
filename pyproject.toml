@@ -1,0 +1,24 @@
+[project]
+name = "day-night-classifier"
+version = "1.0.0"
+description = "A hands-on Machine Learning project to classify Day vs Night images using KNN."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scikit-image",
+    "pillow",
+    "streamlit",
+    "joblib",
+    "matplotlib",
+    "altair",     # Required by Streamlit often
+    "watchdog"    # Good for Streamlit reloading
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "ruff"
+]

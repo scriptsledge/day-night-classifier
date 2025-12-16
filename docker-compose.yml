@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    image: day-night-classifier:latest
+    container_name: day-night-classifier
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    # This keeps the container running so you can exec into it
+    # or it runs the app directly if you prefer automation.
+    # Given our "Hands-On" flow, we want it to stay alive.
+    command: tail -f /dev/null
+    
+    # Alternatively, for a fully automated feel (if you skip hands-on):
+    # command: streamlit run gui_app/app.py

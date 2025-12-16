@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: day-night-classifier-service
+spec:
+  selector:
+    app: day-night-classifier
+  type: NodePort # Or LoadBalancer for cloud providers
+  ports:
+    - protocol: TCP
+      port: 8501
+      targetPort: 8501
+      nodePort: 30080 # Accessible outside the cluster on this port
