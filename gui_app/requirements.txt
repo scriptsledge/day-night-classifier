@@ -1,0 +1,13 @@
+# This file is generated for Streamlit Community Cloud deployment.
+# It lists the core dependencies required by the application.
+
+numpy
+pandas
+scikit-learn
+scikit-image
+pillow
+streamlit
+joblib
+matplotlib
+altair
+watchdog
