@@ -22,3 +22,5 @@ streamlit.log
 
 # Docker/K8s
 *.tar.gz
+kubectl
+coding/

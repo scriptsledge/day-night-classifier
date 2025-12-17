@@ -1,104 +1,117 @@
-# 🌗 Day/Night Scene Classifier: An MLOps Workshop
+<div align="center">
+  <img src="gui_app/assets/icon.png" width="120" alt="Project Logo">
+  
+  <h1>Day/Night Vision</h1>
+  
+  <p>
+    <strong>Enterprise-grade environmental illumination classification system.</strong>
+  </p>
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-Ready-326CE5?logo=kubernetes&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-
-> **A comprehensive demonstration of a Human-in-the-Loop Machine Learning pipeline.**
-
-This repository demonstrates a complete, production-grade workflow for image classification. It transcends simple scripting by integrating industry-standard tools for reproducibility, isolation, and deployment.
+  <!-- Badges: Catppuccin Mocha Themed -->
+  <p>
+    <a href="https://daynightclassifier.streamlit.app/">
+      <img src="https://img.shields.io/badge/Streamlit-Live_Demo-fab387?style=for-the-badge&logo=streamlit&logoColor=1e1e2e" alt="Streamlit App">
+    </a>
+    <img src="https://img.shields.io/badge/Python-3.9%2B-89b4fa?style=for-the-badge&logo=python&logoColor=1e1e2e" alt="Python">
+    <img src="https://img.shields.io/badge/Docker-Ready-a6e3a1?style=for-the-badge&logo=docker&logoColor=1e1e2e" alt="Docker">
+    <img src="https://img.shields.io/badge/License-MIT-cba6f7?style=for-the-badge" alt="License">
+  </p>
+</div>
 
 ---
+
+## 📋 Overview
+
+**Day/Night Vision** is a robust computer vision pipeline designed to classify scenes based on ambient lighting conditions. It leverages a K-Nearest Neighbors (KNN) algorithm trained on custom-extracted HSV (Hue, Saturation, Value) and Grayscale features, delivering high-performance inference suitable for edge deployment.
+
+The interface is built with **Streamlit**, featuring a custom **Catppuccin Mocha** design system for a cohesive, dark-mode-first user experience.
 
 ## 🏗️ Architecture
 
-The project is designed to be **agnostic** to your local environment. It supports multiple execution strategies ranging from local development to containerized deployment.
+This project follows a modular MLOps architecture, ensuring separation of concerns between feature extraction, training, and inference.
 
-### Core Technologies
-*   **Algorithm:** K-Nearest Neighbors (KNN) - Selected for interpretability on small datasets.
-*   **Package Management:** `uv` - High-performance, Rust-based Python dependency manager.
-*   **Containerization:** Docker - Ensures identical execution across all platforms.
-*   **Orchestration:** Kubernetes (K8s) - Manifests provided for enterprise-grade scaling.
-
----
-
-## 📚 Documentation Suite
-
-We have documented every aspect of this project's lifecycle. Please refer to these guides for deep dives:
-
-*   **[🐳 Docker Guide](./docs/DOCKER.md)**  
-    *Detailed instructions on container lifecycle, persistence strategies, and port mapping.*
-*   **[⚡ uv Guide](./docs/UV_GUIDE.md)**  
-    *Understanding modern Python packaging, PEP 668 isolation, and high-performance dependency resolution.*
-*   **[☸️ Kubernetes Guide](./docs/KUBERNETES.md)**  
-    *Deploying the application to a local cluster using Minikube.*
-*   **[🛠️ Kubernetes Journey & Debugging Log](./docs/KUBERNETES_JOURNEY.md)**  
-    *A technical deep-dive into the architectural challenges (Nested Virtualization, Mounting) and solutions encountered during development.*
-*   **[❓ Knowledge Base & FAQ](./docs/FAQ.md)**  
-    *A log of all technical challenges encountered (Permissions, Networking, Package Obsolescence) and their solutions.*
-
----
-
-## 🚀 Execution Strategies (Choose One)
-
-### Option A: The Modern Local Way (`uv`) ⚡
-*Best for: Quick local testing on Linux/macOS.*
-
-1.  **Install `uv`:**
-    ```bash
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    ```
-2.  **Execute Pipeline:**
-    ```bash
-    uv run feature_extractor.py
-    # ... [Action: Manually label 'feature_table.csv'] ...
-    uv run train_and_save_model.py
-    uv run streamlit run gui_app/app.py
-    ```
-
-### Option B: The Containerized Way (Docker) 📦
-*Best for: Stability, Windows users, and preventing "it works on my machine" issues.*
-
-1.  **Install Docker:** [Docker Desktop](https://www.docker.com/products/docker-desktop) or Engine.
-2.  **Build & Run:**
-    ```bash
-    docker compose up --build
-    ```
-    *Access at `http://localhost:8501`*
-
-### Option C: The Enterprise Way (Kubernetes) ☸️
-*Best for: Understanding MLOps and production orchestration.*
-
-*   See the **[Kubernetes Guide](./docs/KUBERNETES.md)** for Minikube setup and deployment manifests.
-
----
-
-## 📝 Labeling Cheat Sheet
-
-For those in a hurry, you can directly copy and paste the content below into your `feature_table.csv` after it's generated by `feature_extractor.py`.
-
-```csv
-ImageName,brightness,contrast,colorfulness,color_variety,Class
-01.jpg,139.6355,42.8660,0.1780,0.2950,Day
-02.jpg,100.1556,46.4589,0.5342,0.0608,Day
-03.jpg,123.3078,39.9940,0.4833,0.1894,Day
-04.jpg,79.9748,61.6957,0.2114,0.2998,Day
-05.jpg,94.4049,60.3152,0.5823,0.0478,Day
-06.jpg,16.4051,8.4403,0.5086,0.3193,Night
-07.jpg,108.1129,45.3258,0.1003,0.1737,Day
-08.jpg,25.6661,40.5000,0.1689,0.3311,Night
-09.jpg,9.7322,24.1201,0.0326,0.1995,Night
-10.jpg,16.5724,16.3025,0.2051,0.3857,Night
-11.jpg,35.5420,35.5521,0.1892,0.2905,Night
-12.jpg,9.3810,12.1130,0.2007,0.3683,Night
-13.jpg,8.7269,11.5817,0.3707,0.2241,Night
-14.jpg,12.6694,14.0165,0.3646,0.3128,Night
-15.jpg,14.7480,19.0101,0.4598,0.2703,Night
-16.jpg,114.0637,41.1641,0.0697,0.1740,Day
-17.jpg,104.5258,59.7980,0.2270,0.2175,Day
-18.jpg,147.4305,34.2419,0.0627,0.3434,Day
-19.jpg,129.2999,65.1716,0.1719,0.2737,Day
-20.jpg,39.9980,50.3397,0.3646,0.2670,Night
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true, 'primaryColor': '#1e1e2e', 'edgeLabelBackground':'#181825', 'tertiaryColor': '#181825', 'mainBkg': '#1e1e2e', 'nodeBorder': '#89b4fa', 'lineColor': '#cdd6f4'}}}%%
+graph LR
+    A[Input Image] --> B(Feature Extractor);
+    B -->|Brightness, Contrast| C[Grayscale Analysis];
+    B -->|Colorfulness, Variance| D[HSV Analysis];
+    C --> E{Feature Vector};
+    D --> E;
+    E --> F[KNN Model];
+    F -->|Inference| G((Prediction));
+    
+    style A fill:#fab387,stroke:#fab387,color:#1e1e2e
+    style G fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+    style F fill:#45475a,stroke:#cdd6f4,color:#cdd6f4
 ```
+
+## 🚀 Quick Start
+
+### 1. Cloud Demo
+Experience the live application instantly: **[Launch Dashboard](https://daynightclassifier.streamlit.app/)**
+
+### 2. Local Deployment (uv)
+We recommend `uv` for lightning-fast dependency management.
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/day-night-classifier.git
+cd day-night-classifier
+
+# Install dependencies and run
+uv run streamlit run gui_app/app.py
+```
+
+### 3. Docker Container
+Run the entire stack in an isolated container.
+
+```bash
+docker compose up --build
+```
+*Access the dashboard at `http://localhost:8501`*
+
+## 🛠️ Tech Stack
+
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Core Logic** | Python 3.12 | Feature extraction & glue code |
+| **ML Engine** | Scikit-Learn | KNN Classifier (k=3, Euclidean) |
+| **Imaging** | Pillow / Scikit-Image | Image processing & transformation |
+| **Frontend** | Streamlit | Interactive web dashboard |
+| **Styling** | CSS / Catppuccin | Custom "Mocha" design system |
+| **DevOps** | Docker / Kubernetes | Containerization & Orchestration |
+
+## 📊 Feature Engineering
+
+The model relies on 4 key engineered features rather than raw pixel data, making it lightweight and interpretable:
+
+1.  **Brightness (`μ`):** Mean pixel intensity (Grayscale).
+2.  **Contrast (`σ`):** Standard deviation of pixel intensity.
+3.  **Colorfulness:** Mean Saturation (S-channel in HSV).
+4.  **Color Variance:** Standard deviation of Hue (H-channel in HSV).
+
+## 📂 Repository Structure
+
+```text
+.
+├── dataset/                # Raw training images
+├── docs/                   # Detailed documentation
+├── gui_app/                
+│   ├── app.py              # Main dashboard entrypoint
+│   └── assets/             # Model artifacts (.joblib) & icons
+├── k8s/                    # Kubernetes manifests
+├── feature_extractor.py    # ETL script for image data
+├── train_and_save_model.py # Training pipeline
+├── generate_assets.py      # Procedurally generates UI assets (Logo)
+└── pyproject.toml          # Dependency configuration
+```
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+<div align="center">
+  <small>Designed with 💜 and ☕ (Catppuccin Mocha)</small>
+</div>

@@ -6,6 +6,9 @@ Welcome to the technical documentation for the Day/Night Classifier. Here you wi
 
 ## 🚀 Deployment Guides
 
+*   **[☁️ Cloud Deployment Guide](./DEPLOYMENT.md)**  
+    *How we deployed to Streamlit Community Cloud and the "Hybrid" repo strategy.*
+
 *   **[🐳 Docker Guide](./DOCKER.md)**  
     Learn how to build, run, and troubleshoot the Docker container. Explains the "Persistence" strategy using volume mounts.
 

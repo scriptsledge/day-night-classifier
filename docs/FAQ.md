@@ -11,9 +11,14 @@
 *   **Data Efficiency:** For small datasets (20 images), KNN performs robustly without the risk of overfitting that plagues complex neural networks.
 *   **Educational Value:** It clearly demonstrates the impact of feature engineering (converting raw pixels to meaningful metrics like Contrast and Brightness).
 
-### Why is the 'Class' column empty?
+### Q: Why is the 'Class' column empty?
 **Design Choice:** The workflow enforces a **Human-in-the-Loop** process.
 **Rationale:** Real-world Machine Learning is rarely fully automated. By requiring manual labeling, we demonstrate the critical role of the "Supervisor" in Supervised Learning. This demystifies the origin of ground truth data.
+
+### Q: Why are the `.joblib` model files included in the repo?
+**A:** To enable the **Instant Cloud Demo** on Streamlit Cloud.
+*   **The Trade-off:** We committed the trained assets (`scaler.joblib`, `knn_model.joblib`) so the web app works immediately for visitors.
+*   **The Workshop:** For the full educational experience, you should **delete these files** locally (`rm gui_app/assets/*.joblib`). This forces you to run the feature extraction and training scripts yourself.
 
 ---
 
